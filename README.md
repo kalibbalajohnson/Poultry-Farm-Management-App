@@ -7,13 +7,9 @@ The Poultry Farm Management App is a full-stack application built using the MERN
 - `frontend/` - Contains the React.js application for the frontend.
 - `backend/` - Contains the Node.js/Express.js application for the backend.
 
----
-
 ## Prerequisites
 Make sure you have the following installed on your system:
 - **Node.js** (version 20 or higher)
-
----
 
 ## Cloning the Project
 
@@ -25,12 +21,16 @@ git clone https://github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24
 
 ### Backend Setup
 cd backend
+
 npm install
+
 npm start
 
 ### Frontend Setup
 cd frontend
+
 npm install
+
 npm run dev
 
 

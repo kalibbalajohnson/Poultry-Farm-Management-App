@@ -20,17 +20,17 @@ git clone https://github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24
 ## Setting Up the Project
 
 ### Backend Setup
-cd backend
+- cd backend
 
-npm install
+- npm install
 
-npm start
+- npm start
 
 ### Frontend Setup
-cd frontend
+- cd frontend
 
-npm install
+- npm install
 
-npm run dev
+- npm run dev
 
 

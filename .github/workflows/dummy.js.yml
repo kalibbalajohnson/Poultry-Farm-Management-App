@@ -32,7 +32,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'   
-
     - name: Install dependencies and build (Front-end)    
       working-directory: ./front-end    
       run: |

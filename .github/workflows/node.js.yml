@@ -27,8 +27,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - run: cd front-end 
-    - name: Use Node.js ${{ matrix.node-version }} 
+    - name: Use Node.js ${{ matrix.node-version }}
+    - run: cd front-end  
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}

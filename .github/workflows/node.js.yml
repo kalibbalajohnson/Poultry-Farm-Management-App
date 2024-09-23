@@ -5,15 +5,15 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
-      - 'front-end/**'
-      - 'back-end/**'
+      - "front-end/**"
+      - "back-end/**"
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
-      - 'front-end/**'
-      - 'back-end/**'
+      - "front-end/**"
+      - "back-end/**"
 
 jobs:
   front-end-build:
@@ -23,18 +23,18 @@ jobs:
       matrix:
         node-version: [18.x, 20.x, 22.x]
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: Install dependencies, build, and test - Front-end
-      working-directory: ./front-end
-      run: |
-        npm ci
-        npm run build --if-present
-        npm test
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: Install dependencies, build, and test - Front-end
+        working-directory: ./front-end
+        run: |
+          npm ci
+          npm run build --if-present
+          npm test
 
   back-end-build:
     if: contains(github.event.head_commit.message, 'back-end') || contains(github.event.pull_request.title, 'back-end')
@@ -43,15 +43,15 @@ jobs:
       matrix:
         node-version: [18.x, 20.x, 22.x]
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: Install dependencies, build, and test - Back-end
-      working-directory: ./back-end
-      run: |
-        npm ci
-        npm run build --if-present
-        npm test
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: Install dependencies, build, and test - Back-end
+        working-directory: ./back-end
+        run: |
+          npm ci
+          npm run build --if-present
+          npm test

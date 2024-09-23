@@ -1,5 +1,5 @@
-# This workflow will conditionally build and test the front-end or back-end
-# depending on which folder has changes.
+# This workflow will build and test both the front-end and back-end unconditionally
+# when changes are detected in either of the folders.
 
 name: Node.js CI
 
@@ -17,7 +17,6 @@ on:
 
 jobs:
   front-end-build:
-    if: contains(github.event.commits[0].modified, 'front-end/')
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -37,7 +36,6 @@ jobs:
           npm test
 
   back-end-build:
-    if: contains(github.event.commits[0].modified, 'back-end/')
     runs-on: ubuntu-latest
     strategy:
       matrix:

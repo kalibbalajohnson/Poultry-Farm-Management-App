@@ -26,8 +26,8 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    working-directory: ./front-end 
     - uses: actions/checkout@v4
+    working-directory: ./front-end 
     - name: Use Node.js ${{ matrix.node-version }} 
       uses: actions/setup-node@v4
       with:

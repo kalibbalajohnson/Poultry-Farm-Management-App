@@ -17,7 +17,7 @@ on:
 
 jobs:
   front-end-build:
-    if: contains(github.event.head_commit.message, 'front-end') || contains(github.event.pull_request.title, 'front-end')
+    if: contains(github.event.commits[0].modified, 'front-end/')
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -37,7 +37,7 @@ jobs:
           npm test
 
   back-end-build:
-    if: contains(github.event.head_commit.message, 'back-end') || contains(github.event.pull_request.title, 'back-end')
+    if: contains(github.event.commits[0].modified, 'back-end/')
     runs-on: ubuntu-latest
     strategy:
       matrix:

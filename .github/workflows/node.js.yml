@@ -1,56 +1,40 @@
-# # This workflow will build and test both the front-end and back-end unconditionally
-# # when changes are detected in either of the folders.
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-# name: Node.js CI
+name: Node.js CI
 
-# on:
-#   push:
-#     branches: ["main"]
-#     paths:
-#       - "front-end/**"
-#       - "back-end/**"
-#   pull_request:
-#     branches: ["main"]
-#     paths:
-#       - "front-end/**"
-#       - "back-end/**"
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+    - "front-end/**"
+    - "back-end/**"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+    - "front-end/**"
+    - "back-end/**"
 
+jobs:
+  build:
 
-# jobs:
-#   front-end-build:
-#     runs-on: ubuntu-latest
-#     strategy:
-#       matrix:
-#         node-version: [18.x, 20.x, 22.x]
-#     steps:
-#       - uses: actions/checkout@v4
-#       - name: Use Node.js ${{ matrix.node-version }}
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: ${{ matrix.node-version }}
-#           cache: "npm"
-#       - name: Install dependencies, build, and test - Front-end
-#         working-directory: ./front-end
-#         run: |
-#           npm ci
-#           npm run build --if-present
-#           npm test
+    runs-on: ubuntu-latest
 
-#   # back-end-build:
-#   #   runs-on: ubuntu-latest
-#   #   strategy:
-#   #     matrix:
-#   #       node-version: [18.x, 20.x, 22.x]
-#   #   steps:
-#   #     - uses: actions/checkout@v4
-#   #     - name: Use Node.js ${{ matrix.node-version }}
-#   #       uses: actions/setup-node@v4
-#   #       with:
-#   #         node-version: ${{ matrix.node-version }}
-#   #         cache: "npm"
-#   #     - name: Install dependencies, build, and test - Back-end
-#   #       working-directory: ./back-end
-#   #       run: |
-#   #         npm ci
-#   #         npm run build --if-present
-#   #         npm test
+    strategy:
+      matrix:
+        node-version: [20.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'     
+    working-directory: ./front-end    
+    - run: npm i
+    - run: npm run build --if-present
+     
+        
+  

@@ -1,5 +1,5 @@
-import multiply from "../hooks/multiply.js"; // Ensure this path is correct
-import { assert } from "chai"; // Import assert from chai correctly
+import multiply from "../hooks/multiply.js"; 
+import { assert } from "chai"; 
 
 describe("Multiply", () => {
   it("should return 1 when multiplying 1 and 1", () => {

@@ -5,10 +5,12 @@ describe("Multiply", () => {
     expect(multiply(1, 1)).toBe(1);  
   });
 
+
   test("should return 4 when multiplying 2 and 2", () => {
     expect(multiply(2, 2)).toBe(4);  
   });
 
+  
   test("should return 9 when multiplying 3 and 3", () => {
     expect(multiply(3, 3)).toBe(9); 
   });

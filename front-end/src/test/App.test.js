@@ -1,7 +1,7 @@
 import multiply from "../hooks/multiply.js"; 
 import { assert } from "chai"; 
 
-describe("Multiply", () => {
+describe("Multiply Function tests", () => {
   it("should return 1 when multiplying 1 and 1", () => {
     assert.equal(multiply(1, 1), 1);
   });

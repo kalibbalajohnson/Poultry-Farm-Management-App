@@ -26,9 +26,10 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          cd back-end && npm install
-          cd back-end && npm run build --if-present
-          cd back-end && npm run test --if-present
+          ls
+          cd front-end && npm install
+          cd front-end && npm run build --if-present
+          cd front-end && npm run test --if-present
 
       - name: Zip artifact for deployment
         run: cd front-end && zip release.zip ./* -r

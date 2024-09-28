@@ -30,6 +30,7 @@ jobs:
           npm run test --if-present
 
       - name: Zip artifact for deployment
+        run: cd front-end && ls
         run: cd front-end/build && zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
@@ -54,7 +55,7 @@ jobs:
           name: node-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip && ls
+        run: unzip release.zip 
       
       - name: Login to Azure
         uses: azure/login@v2

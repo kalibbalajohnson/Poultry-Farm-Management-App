@@ -30,7 +30,7 @@ jobs:
           npm run test --if-present
 
       - name: Zip artifact for deployment
-        run: cd front-end && ls
+        run: cd front-end && ls dist
         # run: cd front-end/build && zip release.zip ./* -r
 
       - name: Upload artifact for deployment job

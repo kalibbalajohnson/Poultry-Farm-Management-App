@@ -41,7 +41,7 @@ jobs:
           npm run test --if-present
 
       - name: Copy frontend build to backend
-        run: ls front-end && cp -r front-end/build back-end/frontend
+        run: cp -r front-end/dist back-end/frontend
 
       - name: Zip artifact for deployment
         run: cd back-end && zip release.zip ./* -r
@@ -68,7 +68,7 @@ jobs:
           name: node-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip && ls
+        run: unzip release.zip && ls && pwd
       
       - name: Login to Azure
         uses: azure/login@v2

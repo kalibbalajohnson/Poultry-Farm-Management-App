@@ -81,5 +81,5 @@ jobs:
         with:
           app-name: 'poultry-app-staging'
           slot-name: 'Production'
-          package: ./
+          package: .
           

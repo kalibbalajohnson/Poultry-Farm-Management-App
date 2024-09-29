@@ -69,7 +69,7 @@ jobs:
           name: node-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip release.zip && ls
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -84,5 +84,5 @@ jobs:
         with:
           app-name: 'poultry-app-staging'
           slot-name: 'Production'
-          package: .
+          package: ./backend
           

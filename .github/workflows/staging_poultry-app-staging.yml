@@ -41,7 +41,7 @@ jobs:
           npm run test --if-present
 
       - name: Copy frontend build to backend
-        run: ls && cp -r front-end/build back-end/frontend
+        run: ls front-end && cp -r front-end/build back-end/frontend
 
       - name: Zip artifact for deployment
         run: cd back-end && zip release.zip ./* -r

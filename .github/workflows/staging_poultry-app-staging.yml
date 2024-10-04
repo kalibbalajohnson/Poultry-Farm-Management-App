@@ -56,7 +56,7 @@ jobs:
           name: node-app
           path: back-end/release.zip
 
-  deploy:
+  deploy_to_staging:
     runs-on: ubuntu-latest
     needs: build
     environment:

@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const logger = require("./logger");
-const promClient = require('prom-client'); 
+const promClient = require('prom-client');
 
 const port = process.env.PORT || 3000;
 const poultryRoutes = require("./routes/poultryRoutes");
@@ -22,7 +22,7 @@ const httpRequestDuration = new promClient.Histogram({
   name: 'http_request_duration_seconds',
   help: 'Duration of HTTP requests in seconds',
   labelNames: ['method', 'route', 'status_code'],
-  buckets: [0.1, 0.3, 0.5, 1, 1.5, 2, 5]  
+  buckets: [0.1, 0.3, 0.5, 1, 1.5, 2, 5]
 });
 
 // Add custom metrics to the registry
@@ -37,6 +37,14 @@ app.use((req, res, next) => {
   next();
 });
 
+// Prometheus: Expose the /metrics endpoint before any catch-all route
+app.get('/metrics', async (req, res) => {
+  logger.info('Metrics endpoint was hit'); // Log for debugging
+  res.set('Content-Type', register.contentType);
+  res.end(await register.metrics());
+});
+
+// Set up the static file serving for your frontend
 app.use(express.static(path.join(__dirname, "frontend")));
 
 // Log all requests
@@ -45,15 +53,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// Prometheus: Expose the /metrics endpoint
-app.get('/metrics', async (req, res) => {
-  res.set('Content-Type', register.contentType);
-  res.end(await register.metrics());
-});
-
+// Define the API routes
 app.use("/api", poultryRoutes);
 
-// Serve the frontend
+// Serve the frontend for any other routes, but make sure it's below the API routes
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "index.html"));
 });

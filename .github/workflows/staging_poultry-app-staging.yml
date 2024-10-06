@@ -8,11 +8,9 @@ name: Build and deploy Node.js app to Azure Web App - poultry-app-staging
 on:
   push:
     branches:
-      - main
       - staging
   pull_request:
     branches:
-      - main
       - staging
   workflow_dispatch:
 
@@ -87,4 +85,5 @@ jobs:
         with:
           app-name: 'poultry-app-staging'
           package: .
+          enable-rollback: true  # Enable rollback on failure
           

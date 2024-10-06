@@ -66,6 +66,6 @@ jobs:
             cd ../back-end && npm i
             ls
             mkdir -p ../back-end/frontend/
-            cp -R dist/* ../back-end/frontend/
+            cp -R ../front-end/dist/* ../back-end/frontend/
           EOF
           

@@ -1,0 +1,70 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+
+name: Build and deploy Node.js app to Azure Web App - poultry-app-staging
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: npm install, build, and test front-end
+        run: |
+          cd front-end
+          npm install
+          npm run build
+          npm run lint 
+          npm run test 
+
+      - name: npm install, build, and test back-end
+        run: |
+          cd back-end
+          npm install
+          npm run build --if-present
+          npm run lint
+          npm run test 
+
+  deploy_to_staging:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    
+      # Checkout the latest code from the branch
+      - name: Checkout code
+        uses: actions/checkout@v2    
+
+       # Install SSH client on the runner
+      - name: Install SSH Client
+        run: sudo apt-get update && sudo apt-get install -y sshpass  
+
+      # SSH into the VM and execute the deployment steps
+      - name: SSH and Deploy
+        run: |
+          sshpass -p "${{ secrets.VM_PASSWORD_PROD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME_PROD }}@${{ secrets.VM_HOST_PROD }} << 'EOF'
+            cd /home/${{ secrets.VM_USERNAME }}/Poultry-Management-App_Group_BSE24-9
+            git pull origin staging
+            cd front-end && npm i
+            npm run build  
+            ls
+            mkdir -p ../back-end/frontend/
+            cp -R dist/* ../back-end/frontend/
+          EOF
+          

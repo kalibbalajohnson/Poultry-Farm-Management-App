@@ -16,7 +16,7 @@ function App() {
         <section className="dashboard-overview">
           <div className="stat-card">
             <h2>Total Chickens</h2>
-            <p>1,200</p>
+            <p>1,000</p>
           </div>
           <div className="stat-card">
             <h2>Egg Production (Today)</h2>

@@ -4,6 +4,6 @@ exports.createRecord = (req, res) => {
 };
 
 exports.getRecords = (req, res) => {
-    res.send("App is running in staging environment");
+    res.send("app is running in staging environment");
 };
 

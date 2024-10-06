@@ -45,13 +45,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api", poultryRoutes);
-
 // Prometheus: Expose the /metrics endpoint
-app.get('/app/metrics', async (req, res) => {
+app.get('/metrics', async (req, res) => {
   res.set('Content-Type', register.contentType);
   res.end(await register.metrics());
 });
+
+app.use("/api", poultryRoutes);
 
 // Serve the frontend
 app.get("*", (req, res) => {

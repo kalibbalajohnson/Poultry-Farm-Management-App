@@ -1,6 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
+
 name: Build and deploy Node.js app to Azure Web App - poultry-app-staging
 
 on:
@@ -62,6 +63,8 @@ jobs:
             git pull origin staging
             cd front-end && npm i
             npm run build  
+            ls
+            mkdir -p ../back-end/frontend/
             cp -R dist/* ../back-end/frontend/
           EOF
           

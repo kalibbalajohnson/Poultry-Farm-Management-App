@@ -62,6 +62,6 @@ jobs:
             git pull origin staging
             cd front-end && npm i
             npm run build  
-            cp -R dist/* ../back-end/front-end/
+            cp -R dist/* ../back-end/frontend/
           EOF
           

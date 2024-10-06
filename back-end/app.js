@@ -26,9 +26,4 @@ app.use("/api", poultryRoutes);
 //   res.sendFile(path.join(__dirname, "frontend", "index.html"));
 // });
 
-app.use((err, req, res) => {
-  logger.error(err.stack);
-  res.status(500).send("Something broke!");
-});
-
 app.listen(port, () => logger.info(`Listening on port ${port}`));

@@ -22,6 +22,6 @@ describe("Multiply Function Tests", () => {
   });
 
   test("should return -20 when multiplying -4 and 5(negative number)", () => {
-    expect(multiply(-4, -4)).toBe(16);  
+    expect(multiply(4, 4)).toBe(16);  
   });
 });

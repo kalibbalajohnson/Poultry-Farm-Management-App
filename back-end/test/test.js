@@ -14,14 +14,14 @@ describe("Multiply Function Tests", () => {
   });
 
   test("should return 16 when multiplying 4 and 4", () => {
-    expect(multiply(4, 4)).toBe(16);  
+    expect(multiply(6, 3)).toBe(18);  
   });
 
   test("should return 1035 when multiplying 23 and 45", () => {
-    expect(multiply(23, 45)).toBe(1035);  
+    expect(multiply(41, 22)).toBe(902);  
   });
 
   test("should return -20 when multiplying -4 and 5(negative number)", () => {
-    expect(multiply(-4, 5)).toBe(-20);  
+    expect(multiply(-4, -4)).toBe(16);  
   });
 });

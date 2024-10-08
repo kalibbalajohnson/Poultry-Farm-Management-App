@@ -41,31 +41,31 @@ jobs:
           npm run lint
           npm run test 
 
-  deploy_to_staging:
-    runs-on: ubuntu-latest
-    needs: build
+  # deploy_to_staging:
+  #   runs-on: ubuntu-latest
+  #   needs: build
 
-    steps:
+  #   steps:
     
-      # Checkout the latest code from the branch
-      - name: Checkout code
-        uses: actions/checkout@v2    
+  #     # Checkout the latest code from the branch
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2    
 
-       # Install SSH client on the runner
-      - name: Install SSH Client
-        run: sudo apt-get update && sudo apt-get install -y sshpass  
+  #      # Install SSH client on the runner
+  #     - name: Install SSH Client
+  #       run: sudo apt-get update && sudo apt-get install -y sshpass  
 
-      # SSH into the VM and execute the deployment steps
-      - name: SSH and Deploy
-        run: |
-          sshpass -p "${{ secrets.VM_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }} << 'EOF'
-            cd /home/${{ secrets.VM_USERNAME }}/Poultry-Management-App_Group_BSE24-9
-            git pull origin staging
-            cd front-end && npm i
-            npm run build  
-            cd ../back-end && npm i
-            ls
-            mkdir -p ../back-end/frontend/
-            cp -R ../front-end/dist/* ../back-end/frontend/
-          EOF
+  #     # SSH into the VM and execute the deployment steps
+  #     - name: SSH and Deploy
+  #       run: |
+  #         sshpass -p "${{ secrets.VM_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }} << 'EOF'
+  #           cd /home/${{ secrets.VM_USERNAME }}/Poultry-Management-App_Group_BSE24-9
+  #           git pull origin staging
+  #           cd front-end && npm i
+  #           npm run build  
+  #           cd ../back-end && npm i
+  #           ls
+  #           mkdir -p ../back-end/frontend/
+  #           cp -R ../front-end/dist/* ../back-end/frontend/
+  #         EOF
           

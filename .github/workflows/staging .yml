@@ -73,7 +73,7 @@ jobs:
               echo "Deployment failed! Rolling back..." 
               git reset --hard $CURRENT_COMMIT
               git push origin HEAD --force
-              pm2 delete back-end || true
-              pm2 start npm --name back-end -- start
+              pm2 delete poultry-app || true
+              pm2 start npm --name poultry-app -- start
             fi  
           EOF

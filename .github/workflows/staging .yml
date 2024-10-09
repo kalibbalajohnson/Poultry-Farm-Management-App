@@ -1,5 +1,13 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
+#  if ! curl -f http://4.206.218.223:3000; then
+#               echo "Deployment failed! Rolling back..." 
+#               git reset --hard $CURRENT_COMMIT
+#               git push origin HEAD --force
+#               pm2 delete poultry-app || true
+#               pm2 start npm --name poultry-app -- start
+#               pm2 save
+#             fi  
 
 name: Build and deploy Node.js app to Azure Web App - poultry-app-staging
 
@@ -70,13 +78,6 @@ jobs:
             pm2 start npm --name "poultry-app" -- start
             pm2 save
 
-            if ! curl -f http://4.206.218.223:3000; then
-              echo "Deployment failed! Rolling back..." 
-              git reset --hard $CURRENT_COMMIT
-              git push origin HEAD --force
-              pm2 delete poultry-app || true
-              pm2 start npm --name poultry-app -- start
-              pm2 save
-            fi  
+           
           EOF
 

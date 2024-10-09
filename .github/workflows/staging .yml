@@ -70,6 +70,8 @@ jobs:
             pm2 start npm --name "poultry-app" -- start
             pm2 save
 
+            sleep 10
+
             if ! curl -f http://4.206.218.223:3000; then
               echo "Deployment failed! Rolling back..." 
               git reset --hard $CURRENT_COMMIT

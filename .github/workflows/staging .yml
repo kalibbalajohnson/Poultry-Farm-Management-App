@@ -60,7 +60,7 @@ jobs:
             set -e
             cd /home/${{ secrets.VM_USERNAME }}/Poultry-Management-App_Group_BSE24-9
             CURRENT_COMMIT=$(git rev-parse HEAD)
-            git pull origin staging
+            git pull https://:${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git staging
             cd front-end && npm i
             npm run build  
             cd ../back-end && npm i
@@ -70,13 +70,15 @@ jobs:
             pm2 start npm --name "poultry-app" -- start
             pm2 save
 
+            sleep 5
+
             if ! curl -f http://4.206.218.223:3000; then
               echo "Deployment failed! Rolling back..." 
               git reset --hard $CURRENT_COMMIT
-              git push origin HEAD --force
+              git push https://${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git HEAD --force
               pm2 delete poultry-app || true
               pm2 start npm --name poultry-app -- start
               pm2 save
             fi  
-          EOF
 
+          EOF

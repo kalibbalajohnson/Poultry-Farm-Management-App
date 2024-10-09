@@ -61,7 +61,6 @@ jobs:
             cd /home/${{ secrets.VM_USERNAME }}/Poultry-Management-App_Group_BSE24-9
             CURRENT_COMMIT=$(git rev-parse HEAD)
             git pull https://:${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git staging
-            git pull origin staging
             cd front-end && npm i
             npm run build  
             cd ../back-end && npm i

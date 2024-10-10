@@ -6,7 +6,7 @@ const path = require("path");
 const logger = require("./logger");
 const promClient = require("prom-client");
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const poultryRoutes = require("./routes/poultryRoutes");
 
 app.use(bodyParser.json());

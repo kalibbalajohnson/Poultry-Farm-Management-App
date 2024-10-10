@@ -2,6 +2,7 @@ import './App.css';
 function App() {
   return (
     <div className="app-container">
+      {/* Header Section with Navigation */}
       <header className="app-header">
         <h1>Poultry Farm Management</h1>
         <nav className="app-navigation">
@@ -11,7 +12,7 @@ function App() {
           <a href="#analytics">Analytics</a>
         </nav>
       </header>
-
+       {/* Main Content Section */}
       <main className="app-main">
         <section className="dashboard-overview">
           <div className="stat-card">

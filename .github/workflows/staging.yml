@@ -43,6 +43,8 @@ jobs:
   deploy_to_staging:
     runs-on: ubuntu-latest
     needs: build
+    environment:
+      name: 'Staging'  
 
     steps:
       # Checkout the latest code from the branch

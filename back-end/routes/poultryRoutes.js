@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const poultryController = require('../controllers/poultryController');
 
-router.post('/', poultryController.createRecord);
+router.post('/daily-records', poultryController.createRecord);
 
-router.get('/', poultryController.getRecords);
+router.get('/daily-records', poultryController.getRecords);
 
 module.exports = router;

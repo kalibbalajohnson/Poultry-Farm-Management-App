@@ -5,6 +5,7 @@ const cors = require("cors");
 const path = require("path");
 const logger = require("./logger");
 const promClient = require("prom-client");
+const {connectToMongoDB} = require("./config/mongoConfig");
 
 const port = process.env.PORT || 3001;
 const poultryRoutes = require("./routes/poultryRoutes");
@@ -43,6 +44,8 @@ app.get("/metrics", async (req, res) => {
   res.end(await register.metrics());
 });
 
+app.use("/api", poultryRoutes);
+
 app.use(express.static(path.join(__dirname, "frontend")));
 
 app.use((req, res, next) => {
@@ -50,10 +53,16 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api", poultryRoutes);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "index.html"));
 });
 
-app.listen(port, () => logger.info(`Listening on port ${port}`));
+// connect to MongoDB and start the server
+connectToMongoDB().then(() => {
+  app.listen(port, () => logger.info(`Listening on port ${port}`));
+}).catch(error => {
+  console.error("Failed to start server due to MongoDB connection error:", error);
+});
+
+

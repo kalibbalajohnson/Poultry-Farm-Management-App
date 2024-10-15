@@ -62,7 +62,7 @@ jobs:
             set -e
             cd /home/${{ secrets.VM_USERNAME }}/Poultry-Management-App_Group_BSE24-9
             git add .
-            git commmit -m "working commit"
+            git commit -m "working commit"
             CURRENT_COMMIT=$(git rev-parse HEAD)
             git pull https://:${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git staging
             cd front-end && npm i

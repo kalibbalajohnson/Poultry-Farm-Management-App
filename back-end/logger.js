@@ -1,3 +1,4 @@
+// Import required modules
 const winston = require("winston");
 const fs = require("fs");
 const path = require("path");
@@ -33,5 +34,5 @@ const logger = winston.createLogger({
     }), 
   ],
 });
-
+// Export the logger instance to be used in other parts of the application
 module.exports = logger;

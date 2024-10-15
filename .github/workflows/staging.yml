@@ -1,7 +1,6 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-
 name: Build and deploy Node.js app to Azure VM - poultry-app-staging
 
 on:
@@ -61,8 +60,6 @@ jobs:
         run: |
           sshpass -p "${{ secrets.VM_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }} << 'EOF'
             set -e
-            sudo apt update
-            sudo apt upgrade -y
             cd /home/${{ secrets.VM_USERNAME }}/Poultry-Management-App_Group_BSE24-9
             git add .
             git commit -m "working commit"

@@ -54,7 +54,11 @@ app.use((req, res, next) => {
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "index.html"));
+  if (!req.originalUrl.startsWith("/api")) {
+    res.sendFile(path.join(__dirname, "frontend", "index.html"));
+  } else {
+    res.status(404).send("API route not found");
+  }
 });
 
 // connect to MongoDB and start the server

@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure VM - poultry-app-production
+name: Build and deploy Node.js app to Azure VM - poultry-app-staging
 
 on:
   push:
@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  front_end_build:
     runs-on: ubuntu-latest
 
     steps:
@@ -41,6 +41,17 @@ jobs:
           npm run test
           npm run build
 
+  back_end_build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.x"
+
       # Cache Node.js dependencies for the back-end
       - name: Cache back-end npm dependencies
         uses: actions/cache@v3
@@ -60,7 +71,9 @@ jobs:
 
   deploy_to_production:
     runs-on: ubuntu-latest
-    needs: build
+    needs:
+      - back_end_build
+      - front_end_build
     environment:
       name: "Production"
 
@@ -76,9 +89,9 @@ jobs:
       # SSH into the VM and execute the deployment steps
       - name: SSH and Deploy
         run: |
-          sshpass -p "${{ secrets.VM_PASSWORD_PROD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME_PROD }}@${{ secrets.VM_HOST_PROD }} << 'EOF'
+          sshpass -p "${{ secrets.VM_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }} << 'EOF'
             set -e
-            cd /home/${{ secrets.VM_USERNAME_PROD }}/Poultry-Management-App_Group_BSE24-9
+            cd /home/${{ secrets.VM_USERNAME }}/Poultry-Management-App_Group_BSE24-9
             CURRENT_COMMIT=$(git rev-parse HEAD)
             git pull https://:${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git main
             cd front-end && npm i
@@ -92,7 +105,7 @@ jobs:
 
             sleep 5
 
-            if ! curl -f http://20.63.73.62:3001; then
+            if ! curl -f http://4.206.218.223:3001; then
               echo "Deployment failed! Rolling back..." 
               git reset --hard $CURRENT_COMMIT
               git push https://${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git HEAD --force

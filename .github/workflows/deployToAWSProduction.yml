@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - main
-      - staging
+      - aws-production
   pull_request:
     branches:
       - main
-      - staging
+      - aws-production
   workflow_dispatch:
 
 jobs:

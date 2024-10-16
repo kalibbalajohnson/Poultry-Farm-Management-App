@@ -19,6 +19,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.x"
+
       # Cache Node.js dependencies for the front-end
       - name: Cache front-end npm dependencies
         uses: actions/cache@v3
@@ -27,11 +32,6 @@ jobs:
           key: front-end-${{ runner.os }}-node-${{ hashFiles('front-end/package-lock.json') }}
           restore-keys: |
             front-end-${{ runner.os }}-node-
-
-      - name: Set up Node.js version
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20.x"
 
       - name: npm install, build, and test front-end
         run: |

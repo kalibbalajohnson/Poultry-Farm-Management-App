@@ -1,0 +1,87 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+
+name: Build and deploy Node.js app to Azure VM - poultry-app-staging
+
+on:
+  push:
+    branches:
+      - staging
+  pull_request:
+    branches:
+      - staging
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.x"
+
+      - name: npm install, build, and test front-end
+        run: |
+          cd front-end
+          npm install
+          npm run lint 
+          npm run test
+          npm run build
+          
+      - name: npm install, build, and test back-end
+        run: |
+          cd back-end
+          npm install
+          npm run lint
+          npm run test
+          npm run build --if-present
+          
+  deploy_to_staging:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Staging'  
+
+    steps:
+      # Checkout the latest code from the branch
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+        # Install SSH client on the runner
+      - name: Install SSH Client
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      # SSH into the VM and execute the deployment steps
+      - name: SSH and Deploy
+        run: |
+          sshpass -p "${{ secrets.VM_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }} << 'EOF'
+            set -e
+            cd /home/${{ secrets.VM_USERNAME }}/Poultry-Management-App_Group_BSE24-9
+            CURRENT_COMMIT=$(git rev-parse HEAD)
+            git pull https://:${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git staging
+            cd front-end && npm i
+            npm run build  
+            cd ../back-end && npm i
+            mkdir -p ../back-end/frontend/
+            cp -R ../front-end/dist/* ../back-end/frontend/
+            pm2 delete poultry-app || true
+            pm2 start npm --name "poultry-app" -- start
+            pm2 save
+
+            sleep 5
+
+            if ! curl -f http://4.206.218.223:3001; then
+              echo "Deployment failed! Rolling back..." 
+              git reset --hard $CURRENT_COMMIT
+              git push https://${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git HEAD --force
+              pm2 delete poultry-app || true
+              pm2 start npm --name poultry-app -- start
+              pm2 save
+            fi  
+
+          EOF

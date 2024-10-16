@@ -1,50 +1,77 @@
 import "./App.css";
+
 function App() {
   return (
     <div className="app-container">
       {/* Header Section with Navigation */}
       <header className="app-header">
-        <h1>Poultry Farm Management</h1>
-        <nav className="app-navigation">
-          <a href="#dashboard">Dashboard</a>
-          <a href="#inventory">Inventory</a>
-          <a href="#sales">Sales</a>
-          <a href="#analytics">Analytics</a>
-        </nav>
+        <h1 className="app-title">Poultry Farm Management</h1>
       </header>
        {/* Main Content Section */}
       <main className="app-main">
-        <section className="dashboard-overview">
-          <div className="stat-card">
-            <h2>Total Chickens</h2>
-            <p>1,200</p>
-          </div>
-          <div className="stat-card">
-            <h2>Egg Production (Today)</h2>
-            <p>4,500 eggs</p>
-          </div>
-          <div className="stat-card">
-            <h2>Sales (Monthly)</h2>
-            <p>$10,200</p>
-          </div>
+        <section className="daily-records">
+          <h3 className="section-title">Daily Records</h3>
+          <form className="record-form">
+            <div className="form-group">
+              <label htmlFor="numberOfHens" className="form-label">
+                Number of Hens:
+              </label>
+              <input
+                type="number"
+                id="numberOfHens"
+                name="numberOfHens"
+                required
+                className="form-input"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="numberOfEggs" className="form-label">
+                Number of Eggs:
+              </label>
+              <input
+                type="number"
+                id="numberOfEggs"
+                name="numberOfEggs"
+                required
+                className="form-input"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="quantityOfFood" className="form-label">
+                Quantity of Food (in kg):
+              </label>
+              <input
+                type="number"
+                id="quantityOfFood"
+                name="quantityOfFood"
+                required
+                className="form-input"
+              />
+            </div>
+            <button type="submit" className="submit-button">
+              Add Record
+            </button>
+          </form>
         </section>
 
-        <section className="action-cards">
-          <div className="card">
-            <h3>Manage Chickens</h3>
-            <p>Update chicken inventory, track health, and more.</p>
-            <button className="primary-button">Manage</button>
-          </div>
-          <div className="card">
-            <h3>Track Egg Production</h3>
-            <p>Record daily egg production and track trends.</p>
-            <button className="primary-button">Track</button>
-          </div>
-          <div className="card">
-            <h3>Analyze Sales</h3>
-            <p>View detailed sales reports and insights.</p>
-            <button className="primary-button">Analyze</button>
-          </div>
+        <section>
+          <h3 className="section-title">Records</h3>
+          <table className="records-table">
+            <thead className="table-header">
+              <tr>
+                <th className="table-cell">Number of Hens</th>
+                <th className="table-cell">Number of Eggs</th>
+                <th className="table-cell">Quantity of Food (kg)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="table-cell">1200</td>
+                <td className="table-cell">1000</td>
+                <td className="table-cell">70</td>
+              </tr>
+            </tbody>
+          </table>
         </section>
       </main>
 

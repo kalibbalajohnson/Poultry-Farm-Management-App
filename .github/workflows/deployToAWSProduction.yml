@@ -37,7 +37,7 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
-        - name: Copy frontend build to backend
+      - name: Copy frontend build to backend
           run: ls
           run: cp -r ../front-end/dist ./frontend
 

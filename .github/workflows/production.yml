@@ -33,7 +33,7 @@ jobs:
           restore-keys: |
             front-end-${{ runner.os }}-node-
 
-      - name: npm install, build, and test front-end
+      - name: npm install, test, and build front-end
         run: |
           cd front-end
           npm install
@@ -50,7 +50,7 @@ jobs:
           restore-keys: |
             back-end-${{ runner.os }}-node-
 
-      - name: npm install, build, and test back-end
+      - name: npm install, test, and build back-end
         run: |
           cd back-end
           npm install

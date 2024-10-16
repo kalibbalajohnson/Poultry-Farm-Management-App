@@ -38,7 +38,6 @@ jobs:
             npm run test --if-present
 
         - name: Copy frontend build to backend
-          run: ls
           run: cp -r ../front-end/dist ./frontend
 
         - name: Zip artifact for deployment

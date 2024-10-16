@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  front_end_build:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,13 +33,24 @@ jobs:
           restore-keys: |
             front-end-${{ runner.os }}-node-
 
-      - name: npm install, build, and test front-end
+      - name: npm install, test, and build front-end
         run: |
           cd front-end
           npm install
           npm run lint 
           npm run test
           npm run build
+
+  back_end_build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.x"
 
       # Cache Node.js dependencies for the back-end
       - name: Cache back-end npm dependencies
@@ -49,8 +60,8 @@ jobs:
           key: back-end-${{ runner.os }}-node-${{ hashFiles('back-end/package-lock.json') }}
           restore-keys: |
             back-end-${{ runner.os }}-node-
-      
-      - name: npm install, build, and test back-end
+
+      - name: npm install, test, and build back-end
         run: |
           cd back-end
           npm install
@@ -60,7 +71,9 @@ jobs:
 
   deploy_to_staging:
     runs-on: ubuntu-latest
-    needs: build
+    needs:
+      - back_end_build
+      - front_end_build
     environment:
       name: "Staging"
 

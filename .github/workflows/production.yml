@@ -105,7 +105,7 @@ jobs:
 
             sleep 5
 
-            if ! curl -f http://http://20.63.73.62:3001; then
+            if ! curl -f http://20.63.73.62:3001; then
               echo "Deployment failed! Rolling back..." 
               git reset --hard $CURRENT_COMMIT
               git push https://${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git HEAD --force

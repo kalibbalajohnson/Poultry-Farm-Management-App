@@ -1,45 +1,79 @@
-#root {
+.app-container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.app-header {
+  margin-bottom: 1.5rem;
 }
 
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.app-title {
+  font-size: 2rem; /* Equivalent to text-3xl */
+  font-weight: bold; /* Equivalent to font-bold */
 }
 
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app-main {
+  margin-bottom: 2rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.daily-records {
+  margin-bottom: 1.5rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.section-title {
+  font-size: 1.125rem; /* Equivalent to text-lg */
+  font-weight: 600; /* Equivalent to font-semibold */
+  margin-bottom: 0.5rem; /* Equivalent to mb-2 */
 }
 
-.card {
-  padding: 2em;
+.record-form {
+  background-color: #f7fafc; /* Equivalent to bg-gray-100 */
+  padding: 1rem; /* Equivalent to p-4 */
+  border-radius: 0.375rem; /* Equivalent to rounded */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Equivalent to shadow */
 }
 
-.read-the-docs {
-  color: #888;
+.form-group {
+  margin-bottom: 1rem; /* Equivalent to mb-4 */
+}
+
+.form-label {
+  display: block; /* Equivalent to block */
+  margin-bottom: 0.25rem; /* Equivalent to mb-1 */
+}
+
+.form-input {
+  border: 1px solid #d1d5db; /* Equivalent to border-gray-300 */
+  border-radius: 0.25rem; /* Equivalent to rounded */
+  width: 100%; /* Equivalent to w-full */
+  padding: 0.5rem; /* Equivalent to p-2 */
+}
+
+.submit-button {
+  background-color: #3b82f6; /* Equivalent to bg-blue-500 */
+  color: white;
+  padding: 0.5rem 1rem; /* Equivalent to px-4 py-2 */
+  border-radius: 0.375rem; /* Equivalent to rounded */
+  cursor: pointer;
+}
+
+.records-table {
+  min-width: 100%; /* Equivalent to min-w-full */
+  background-color: white; /* Equivalent to bg-white */
+  border: 1px solid #d1d5db; /* Equivalent to border-gray-300 */
+}
+
+.table-header {
+  background-color: #e5e7eb; /* Equivalent to bg-gray-200 */
+}
+
+.table-cell {
+  padding: 0.5rem; /* Equivalent to py-2 */
+  border: 1px solid #d1d5db; /* Equivalent to border-gray-300 */
+}
+
+.app-footer {
+  text-align: center;
 }

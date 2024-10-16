@@ -71,7 +71,7 @@ jobs:
 
   deploy_to_staging:
     runs-on: ubuntu-latest
-    needs: build
+    needs: back_end_build, front_end_build
     environment:
       name: "Staging"
 

@@ -3,11 +3,12 @@ import "./App.css";
 function App() {
   return (
     <div className="app-container">
+      {/* Header Section with Navigation */}
       <header className="app-header">
         <h1 className="app-title">Poultry Farm Management App</h1>
       </header>
-      
 
+       {/* Main Content Section */}
       <main className="app-main">
         <section className="daily-records">
           <h3 className="section-title">Daily Records</h3>

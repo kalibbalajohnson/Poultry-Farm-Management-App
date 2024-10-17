@@ -1,7 +1,10 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 #git push https://${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git HEAD --force
-
+#  if curl -f http://4.206.218.223:3001; then
+#               git add .
+#               git commit -m "Last known working commit"
+#             fi  
 name: Build and deploy Node.js app to Azure VM - poultry-app-staging
 
 on:
@@ -94,9 +97,13 @@ jobs:
             set -e
             cd /home/${{ secrets.VM_USERNAME }}/Poultry-Management-App_Group_BSE24-9
             if curl -f http://4.206.218.223:3001; then
-              git add .
-              git commit -m "Last known working commit"
-            fi  
+              if ! git diff-index --quiet HEAD --; then
+                git add .
+                git commit -m "Last known working commit"
+              else
+                echo "No changes to commit"
+              fi
+            fi
             WORKING_COMMIT=$(git rev-parse HEAD)
             git pull https://:${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git staging
             cd front-end && npm i

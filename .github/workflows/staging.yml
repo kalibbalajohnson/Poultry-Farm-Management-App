@@ -1,5 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
+#git push https://${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git HEAD --force
+
 
 name: Build and deploy Node.js app to Azure VM - poultry-app-staging
 
@@ -92,7 +94,7 @@ jobs:
           sshpass -p "${{ secrets.VM_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }} << 'EOF'
             set -e
             cd /home/${{ secrets.VM_USERNAME }}/Poultry-Management-App_Group_BSE24-9
-            CURRENT_COMMIT=$(git rev-parse HEAD)
+            WORKING_COMMIT=$(git rev-parse HEAD)
             git pull https://:${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git staging
             cd front-end && npm i
             npm run build  
@@ -107,8 +109,7 @@ jobs:
 
             if ! curl -f http://4.206.218.223:3001; then
               echo "Deployment failed! Rolling back..." 
-              git reset --hard $CURRENT_COMMIT
-              git push https://${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git HEAD --force
+              git reset --hard $WORKING_COMMIT
               pm2 delete poultry-app || true
               pm2 start npm --name poultry-app -- start
               pm2 save

@@ -6,6 +6,7 @@ function App() {
       <header className="app-header">
         <h1 className="app-title">Poultry Farm Management App</h1>
       </header>
+      
 
       <main className="app-main">
         <section className="daily-records">

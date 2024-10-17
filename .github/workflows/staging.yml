@@ -94,14 +94,6 @@ jobs:
           sshpass -p "${{ secrets.VM_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME }}@${{ secrets.VM_HOST }} << 'EOF'
             set -e
             cd /home/${{ secrets.VM_USERNAME }}/Poultry-Management-App_Group_BSE24-9
-            if curl -f http://4.206.218.223:3001; then
-              if ! git diff-index --quiet HEAD --; then
-                git add .
-                git commit -m "Last known working commit"
-              else
-                echo "No changes to commit"
-              fi
-            fi
             WORKING_COMMIT=$(git rev-parse HEAD)
             git pull https://:${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git staging
             cd front-end && npm i

@@ -92,7 +92,7 @@ jobs:
           sshpass -p "${{ secrets.VM_PASSWORD_PROD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME_PROD }}@${{ secrets.VM_HOST_PROD }} << 'EOF'
             set -e
             cd /home/${{ secrets.VM_USERNAME_PROD }}/Poultry-Management-App_Group_BSE24-9
-            CURRENT_COMMIT=$(git rev-parse HEAD)
+            WORKING_COMMIT=$(git rev-parse HEAD)
             git pull https://:${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git main
             cd front-end && npm i
             npm run build  
@@ -107,8 +107,7 @@ jobs:
 
             if ! curl -f http://20.63.73.62:3001; then
               echo "Deployment failed! Rolling back..." 
-              git reset --hard $CURRENT_COMMIT
-              git push https://${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git HEAD --force
+              git reset --hard $WORKING_COMMIT
               pm2 delete poultry-app || true
               pm2 start npm --name poultry-app -- start
               pm2 save

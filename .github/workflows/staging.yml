@@ -98,7 +98,7 @@ jobs:
               git commit -m "Last known working commit"
             fi  
             WORKING_COMMIT=$(git rev-parse HEAD)
-            git pull https://:${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git staging
+            git pull --rebase https://:${{ secrets.SHARED_GITHUB_TOKEN }}@github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24-9.git staging
             cd front-end && npm i
             npm run build  
             cd ../back-end && npm i

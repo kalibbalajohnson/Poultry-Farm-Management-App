@@ -11,7 +11,7 @@ function App() {
        {/* Main Content Section */}
       <main className="app-main">
         <section className="daily-records">
-          <h3 className="section-title">Daily Records</h3>
+          <h3 className="section-title">Daily Records of the farm</h3>
           <form className="record-form">
             <div className="form-group">
               <label htmlFor="numberOfHens" className="form-label">

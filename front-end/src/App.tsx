@@ -5,7 +5,7 @@ function App() {
     <div className="app-container">
       {/* Header Section with Navigation */}
       <header className="app-header">
-        <h1 className="app-title">Poultry Farm Management</h1>
+        <h1 className="app-title">Poultry Farm Management Application</h1>
       </header>
 
        {/* Main Content Section */}

@@ -33,4 +33,4 @@ git clone https://github.com/kalibbalajohnson/Poultry-Management-App_Group_BSE24
 
 - npm run dev
 
-
+YAML file defines a GitHub Actions workflow to build and deploy a Node.js app to an Azure Web App (poultry-app-staging).

@@ -7,7 +7,7 @@ const logger = require("./logger");
 const promClient = require("prom-client");
 const {connectToMongoDB} = require("./config/mongoConfig");
 
-const port = process.env.PORT || 2001;
+const port = process.env.PORT || 3001;
 const poultryRoutes = require("./routes/poultryRoutes");
 
 app.use(bodyParser.json());

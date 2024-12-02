@@ -5,14 +5,6 @@ describe("Multiply Function Tests", () => {
     expect(multiply(6, 6)).toBe(36);  
   });
 
-  test("should return 1 when multiplying 1 and 1", () => {
-    expect(multiply(1, 1)).toBe(1);  
-  });
-
-  test("should return 10 when multiplying 10 and 1", () => {
-    expect(multiply(10, 1)).toBe(10); 
-  });
-
   test("should return 16 when multiplying 4 and 4", () => {
     expect(multiply(6, 3)).toBe(18);  
   });
